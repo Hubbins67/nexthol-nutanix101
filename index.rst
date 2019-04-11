@@ -15,9 +15,7 @@
   :name: _appendix
   :hidden:
 
-  taskman/taskman
-  tools_vms/linux_tools_vm
-  tools_vms/windows_tools_vm
+  
 
 .. _getting_started:
 
