@@ -391,7 +391,7 @@ Creating a Linux VM
 
 In this exercise you will create a CentOS VM from an existing, pre-installed disk image in the Image Service. It is common in many environments to have "template" style images of pre-installed operating systems. Similar to the previous exercise, the disk image has already been uploaded to the Image Service.
 
-#. In **Prism Element > VM > Table**, click **+ Create VM**.
+#. From the View Options menu, select **VM** and select **Table**, then click **+ Create VM**.
 
 #. Fill out the following fields and click **Save**. Leave other settings at their default values.
 
@@ -509,7 +509,7 @@ In this exercise you will use Prism to create and restore from VM snapshots, as 
 VM Snapshots
 ............
 
-#. In **Prism Element > VM > Table**, select your *Initials*-**Linux_VM** VM.
+#. From the View Options menu, select **VM** and select **Table**, and select your *Initials*-**Linux_VM** VM.
 
 #. If the VM is powered on, perform a **Guest Shutdown** power action.
 
@@ -548,7 +548,7 @@ As previously mentioned, Nutanix snapshots use a `redirect-on-write <https://nut
 Protection Domains
 ..................
 
-#. In **Prism Element > Data Protection > Table**, click **+ Protection Domain > Async DR** to begin creating a PD.
+#. From the View Options menu, select **Data Protection** and select **Table**, click **+ Protection Domain > Async DR** to begin creating a PD.
 
    .. note::
 
