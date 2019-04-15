@@ -41,11 +41,11 @@ The Prism service provides the web UI for managing Nutanix clusters and runs on 
 
    .. figure:: images/nutanix_tech_overview_02.png
 
-#. Review the UI navigation options.
+#. Review the UI navigation options under the **View Options** pull-down menu. The label of this menu changes based on the dashboard that is currently displayed. For example, from the Home dashboard it will be labeled **Home**, from the Health dashboard it will be labeled **Health**, etc.
 
    .. figure:: images/nutanix_tech_overview_03.png
 
-#. Examine the cluster hardware under **Prism > Hardware**, click **Hardware**, then click **Diagram**.
+#. Examine the cluster hardware under **Home > Hardware**, click **Hardware**, then click **Diagram**.
 
 #. Review the hardware summary information:
 
@@ -75,9 +75,13 @@ The Prism service provides the web UI for managing Nutanix clusters and runs on 
    - Search :fa:`search`
    - Help :fa:`question`
    - Configuration :fa:`cog`
-   - User :fa:`user`
+   - User
 
    .. figure:: images/nutanix_tech_overview_05.png
+
+   .. note::
+
+     The screenshot above may differ slightly than what is seen in the lab environment.
 
 Prism Element UI Review
 .......................
@@ -86,25 +90,25 @@ Where would you locate the version of AOS you are running?
 
 .. figure:: images/nutanix_tech_overview_06.png
 
-You can do this by clicking on the **User** drop down :fa:`user`, and clicking **About Nutanix**.
+You can do this by clicking on the **username** drop down on the far right, and clicking **About Nutanix**.
 
 How would you get to the following screen to view a summary of the number of hosts (or nodes) and the resource capacity and current utilization?
 
 .. figure:: images/nutanix_tech_overview_07.png
 
-In **Prism > Hardware**, click **Hardware**, then click **Table**.
+From the View Options menu, select **Hardware**, then click **Table**.
 
 How would you get the following screen to see the health of your cluster?
 
 .. figure:: images/nutanix_tech_overview_08.png
 
-In **Prism > Health**, click **Health**, then click **Summary** in the right pane.
+From the View Options menu, select **Health**, then click **Summary** in the right pane.
 
 What page would show you the latest activity in the system? On this page, you can monitor the progress of any task and keep track of what has been done in the past using time stamps. Can you figure out two different ways to get there?
 
 .. figure:: images/nutanix_tech_overview_09.png
 
-Browse to **Prism > Tasks** and click **Tasks**, or click the :fa:`circle-o` icon in the toolbar.
+From the View Options menu, select **Tasks**, or click the circle :fa:`circle-o` icon in the toolbar, to the right of the bell icon :fa:`bell`.
 
 Distributed Storage Fabric
 ++++++++++++++++++++++++++
@@ -137,6 +141,10 @@ Configuring Storage Containers
    - **Advertised Capacity** - 500 GiB
    - Select **Compression**
    - **Delay (In Minutes)** - 0
+
+   .. note::
+
+     Leave other settings at their default values.
 
 #. Click **Save**.
 
@@ -191,7 +199,7 @@ Block Awareness, in a sufficiently large cluster, ensures that secondary copies 
 
 The basic requirement for rack/block fault tolerance is to have minimum 3 blocks in the cluster (for RF2) as we need to store 3 copies of metadata. Starting in AOS 5.8, rack and block awareness can be supported with erasure coding enabled.
 
-#. In **Prism > Home**, click **OK** in the **Data Resiliency Status** box.
+#. From the View Options menu, click **Home**, and click **OK** in the **Data Resiliency Status** box.
 
 .. figure:: images/storage_config_03.png
 
@@ -225,9 +233,9 @@ Setup User VM Network
 
 Connect to Prism Element and create a network for user VM interfaces. Use any VLAN other than 0, and do not enable IP address management.
 
-#. In **Prism Element > VM**, click **VMs**, then click **Network Config**.
+#. From the View Options menu, select **VM**, and click **Network Config** on the right hand side.
 
-#. Select **VM Networks**, then click **+ Create Network**.
+#. Select **Virtual Networks**, then click **+ Create Network**.
 
 #. Fill out the following fields and click **Save**:
 
@@ -291,9 +299,9 @@ In order to provide high performance IO to VMs, AHV requires the installation of
 
 Nutanix validates and distributes these drivers via http://portal.nutanix.com. The ISO image containing the drivers has already been uploaded to the Image Service.
 
-#. In **Prism Element > VM > Table**, click **+ Create VM**.
+#. From the View Options menu, select **VM** and click **+ Create VM**.
 
-#. Fill out the following fields and click **Save**:
+#. Fill out the following fields and click **Save**. Leave other settings at their default values.
 
    - **Name** - *Initials*-Windows_VM
    - **Description** - (Optional) Description for your VM.
@@ -309,7 +317,7 @@ Nutanix validates and distributes these drivers via http://portal.nutanix.com. T
    - Select **+ Add New Disk**
        - **Type** - DISK
        - **Operation** - Allocate on Storage Container
-       - **Storage Container** - Default Container
+       - **Storage Container** - Default
        - **Size (GiB)** - 30 GiB
        - Select **Add**
        *This will create a 30GiB vDisk on the selected Storage Container*
@@ -327,14 +335,16 @@ Nutanix validates and distributes these drivers via http://portal.nutanix.com. T
 
 #. Click **Save** to create the VM.
 
-#. Select the VM, then click **Power On** from the **Actions** drop-down menu to turn on the VM.
+#. Select the VM, then click **Power On** from the list of action links (below the table) to turn on the VM.
 
-#. Select the VM, then click **Launch Console** from the **Actions** drop-down menu to access an HTML5 console to interact with the VM.
+   .. figure:: images/deploy_workloads_vm_options.png
+
+#. Select the VM, then click **Launch Console** from the list of action links to access an HTML5 console to interact with the VM.
 
 #. Progress through the standard install questions until you reach the Windows install location.
 
    .. note::
-     Choose **Datacenter with GUI** and **Custom** installation when presented with the choice.
+     Choose **Windows Server 2012 R2 Datacenter (Server with a GUI)** and **Custom** installation when presented with the choice.
 
 #. Click **Load Driver** and navigate to the CD where the Nutanix VirtIO is mounted.
 
@@ -358,7 +368,7 @@ Nutanix validates and distributes these drivers via http://portal.nutanix.com. T
 
 #. Select that disk and continue with the normal install process.
 
-#. After the installation completes, the Windows install ISO can be unmounted and the additional CD-ROM used for the drivers can be removed from the VM.
+#. After the installation completes, if desired, the Windows install and the VirtIO ISOs can be unmounted from within Windows, and the CD-ROMs can be removed from the VM by selecting the VM in the table, clicking **Update** from the list of action links, and removing the CD-ROM disks (VM must be powered off).
 
    .. note::
 
@@ -366,20 +376,24 @@ Nutanix validates and distributes these drivers via http://portal.nutanix.com. T
 
      .. figure:: images/deploy_workloads_08.png
 
-#. Following OS installation you can complete the **Nutanix Guest Tools (NGT)** installtion by selecting the VM in Prism and clicking **Manage Guest Tools > Enable Guest Tools > Mount Guest Tools**.
+#. Following OS installation you can complete the **Nutanix Guest Tools (NGT)** installation by selecting the VM in Prism and clicking **Manage Guest Tools > Enable Nutanix Guest Tools > Mount Guest Tools**, and clicking **Submit**.
 
    This will use the virtual CD-ROM device to mount the NGT installation ISO to the VM. NGT includes the previously installed VirtIO drivers, as well as services to support self-service file restore and application consistent (VSS) snapshots.
 
-#. Return to the VM console to complete the NGT installation.
+    .. figure:: images/deploy_workloads_nutanix_guest_tools.png
+
+#. Return to the VM console to complete the NGT installation by clicking on the Nutanix Guest Tools CD.
+
+    .. figure:: images/deploy_workloads_ngt_mounted.png
 
 Creating a Linux VM
 ...................
 
 In this exercise you will create a CentOS VM from an existing, pre-installed disk image in the Image Service. It is common in many environments to have "template" style images of pre-installed operating systems. Similar to the previous exercise, the disk image has already been uploaded to the Image Service.
 
-#. In **Prism Element > VM > Table**, click **+ Create VM**.
+#. From the View Options menu, select **VM** and select **Table**, then click **+ Create VM**.
 
-#. Fill out the following fields and click **Save**:
+#. Fill out the following fields and click **Save**. Leave other settings at their default values.
 
    - **Name** - *Initials*-Linux_VM
    - **Description** - (Optional) Description for your VM.
@@ -412,7 +426,7 @@ Power Actions and Console Access
 
 Explore VM power actions and console access.
 
-#. In **Prism Element > VM > Table**, use the search bar to locate the Linux VM you created in the previous exercise (*Initials*-**Linux_VM**).
+#. From the View Options menu, select **VM**, and click **Table**. Use the search bar to locate the Linux VM you created in the previous exercise (*Initials*-**Linux_VM**).
 
    Note that the Power State column for that VM shows a red dot, indicating that the VM is powered off.
 
@@ -435,11 +449,11 @@ Explore VM power actions and console access.
 Cloning VMs
 ...........
 
-#. In **Prism Element > VM > Table**, select your *Initials*-**Linux_VM** VM.
+#. If not already in the VM table view, select **VM** from the View Options menu, and click **Table**. Select your *Initials*-**Linux_VM** VM.
 
-#. Click **Clone** from the **Actions** list.
+#. Click **Clone** from the list of action links (below the table).
 
-#. Fill out the following fields and click **Save**:
+#. Fill out the following fields and click **Save**. Leave other settings at their default values.
 
    - **Number of Clones** - 2
    - **Prefix Name**  - *Initials*-Linux-Clone
@@ -451,60 +465,21 @@ Cloning VMs
 
    Both Nutanix snapshots and clones use a `redirect-on-write <https://nutanixbible.com/#anchor-book-of-acropolis-snapshots-and-clones>`_ algorithm to quickly and efficiently create copies of VMs as a metadata operation.
 
-Migrating a VM Between Hosts
-............................
+High Availability, Live Migration & Affinity Policies
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-VM live migration is a critical feature for any virtualized environment, allowing VMs to move seamlessly across hosts within a cluster to enable infrastructure maintenance or performance balancing.
+.. note::
 
-#. In **Prism Element > VM > Table**, select your *Initials*-**Linux_VM** VM.
+  Your lab environment consists of a single node cluster. The following is informational only.
 
-   You should see that it has no entry in the **Host** column when it is powered off.
-
-   .. figure:: images/manage_workloads_03.png
-
-#. Select the **Powered On** VM, then click **Migrate**.
-
-   You can either choose one of the other hosts in the cluster as a migration target for the VM, or accept the default and let AHV automatically select a location.
-
-#. Click **Migrate** to finalize the action.
-
-   When the task completes, verify that your VM host location has changed from the host recorded above to the new location you selected.
-
-   .. figure:: images/manage_workloads_04.png
-
-Configuring Affinity Policies
-.............................
-
-#. In **Prism Element > VM > Table**, select your *Initials*-**Linux_VM** VM.
-
-#. Select a **Powered Off** VM, then click **Update** and **+ Set Affinity**.
-
-#. Select two **Hosts** to which the VM can have affinity, and click **Save** and **Save** to finish.
-
-   .. note:: We select more then one host so the VM has a place to migrate too in the event of a Node failure.
-
-#. Power on the VM, and verify it is on one of the **Hosts** you selected in the affinity policy.
-
-#. Select the VM, then click **Migrate**.
-
-   You should see the following message:
-
-   - This VM has host affinity with 2 out of the 4 available hosts. It can only be migrated to those hosts.
-
-#. Click **Migrate**.
-
-   You should see that the VM has moved to the other host.
-
-VM-to-Host affinity rules are commonly used to map VMs to certain hosts for performance or licensing reasons. AHV can also create VM-to-VM anti-affinity rules, commonly used for highly available applications where you need to ensure multiple instances of an application do not run on the same node.
-
-High Availability & Dynamic Scheduling
-......................................
+High availability
+.................
 
 Unlike ESXi, high availability is enabled by default for AHV and will restart VMs in a best-effort manner in the event of a host failure. Additional configuration can set resource reservations to ensure there is capacity during an HA event.
 
 .. note::
 
-   To enable memory reservation, select **Enable HA Reservation** under :fa:`cog` **> Manage VM High Availability**.
+   To enable memory reservation, in a cluster of at least 2 nodes, select **Enable HA Reservation** under :fa:`cog` **> Manage VM High Availability**.
 
    As memory is already limited on the shared cluster resources, please do NOT enable HA memory reservations.
 
@@ -513,6 +488,16 @@ With the **Acropolis Dynamic Scheduler** service, AHV performs intelligent initi
 A benefit of a Nutanix AHV solution is being able to make VM placement decisions not based solely on CPU/memory congestion avoidance, but also based on storage performance.
 
 See `here <https://nutanixbible.com/#anchor-book-of-acropolis-dynamic-scheduler>`_ for additional details about the **Acropolis Dynamic Scheduler**.
+
+Live Migration
+..............
+
+VM live migration is a critical feature for any virtualized environment, allowing VMs to move seamlessly across hosts within a cluster to enable infrastructure maintenance or performance balancing. In a cluster of at least 2 nodes, you would be able to select the VM from the table and click **Migrate** from the list of action links.
+
+Affinity Policies
+..................
+
+VM-to-Host affinity rules are commonly used to map VMs to certain hosts for performance or licensing reasons. AHV can also create VM-to-VM anti-affinity rules, commonly used for highly available applications where you need to ensure multiple instances of an application do not run on the same node. In a cluster of at least 2 nodes, there would be a **+ Set Affinity** option within the VM options.
 
 Data Protection
 +++++++++++++++
@@ -524,7 +509,7 @@ In this exercise you will use Prism to create and restore from VM snapshots, as 
 VM Snapshots
 ............
 
-#. In **Prism Element > VM > Table**, select your *Initials*-**Linux_VM** VM.
+#. From the View Options menu, select **VM** and select **Table**, and select your *Initials*-**Linux_VM** VM.
 
 #. If the VM is powered on, perform a **Guest Shutdown** power action.
 
@@ -563,7 +548,7 @@ As previously mentioned, Nutanix snapshots use a `redirect-on-write <https://nut
 Protection Domains
 ..................
 
-#. In **Prism Element > Data Protection > Table**, click **+ Protection Domain > Async DR** to begin creating a PD.
+#. From the View Options menu, select **Data Protection** and select **Table**, click **+ Protection Domain > Async DR** to begin creating a PD.
 
    .. note::
 
@@ -583,7 +568,7 @@ Protection Domains
 
 #. Click **New Schedule** to define Recovery Point Objective (RPO) and retention.
 
-#. Configure your desired snapshot frequency (e.g. Repeat every 1 hour)
+#. Configure your desired snapshot frequency (e.g. Repeat every 6 hours)
 
    .. note::
 
