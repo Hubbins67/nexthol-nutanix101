@@ -1,11 +1,5 @@
 .. title:: Nutanix .Next Nutanix 101 HOL
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Appendix
-  :name: _appendix
-  :hidden:
-
 .. _nutanix101:
 
 ------------------------
