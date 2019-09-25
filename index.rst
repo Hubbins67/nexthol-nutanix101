@@ -297,7 +297,7 @@ AHV provides an **Image Service** feature allows you to build a store of importe
 
    You can explore the available images and upload additional images under :fa:`cog` **> Image Configuration** in Prism Element.
 
-In order to provide high performance IO to VMs, AHV requires the installation of paravirtualized drivers into the guest (similar to VMware Tools). For Windows guests specifically, these drivers must be loaded during installation in order for the VM's disk to be accessible by the Windows installer.
+In order to provide high performance IO to VMs, AHV requires the installation of VirtIO paravirtualized drivers into the guest (similar to VMware Tools). For Windows guests specifically, these drivers must be loaded during installation in order for the VM's disk to be accessible by the Windows installer.
 
 Nutanix validates and distributes these drivers via http://portal.nutanix.com. The ISO image containing the drivers has already been uploaded to the Image Service.
 
@@ -314,7 +314,7 @@ Nutanix validates and distributes these drivers via http://portal.nutanix.com. T
    - **Memory** - 4 GiB
    - Select :fa:`pencil` next to CDROM
        - **Operation** - Clone from Image Service
-       - **Image** - Windows2012R2.ISO
+       - **Image** - Windows2016.ISO
        - Select **Update**
 
        *This will mount the Windows Server ISO from the Image Service for boot/installation*
@@ -359,7 +359,7 @@ Nutanix validates and distributes these drivers via http://portal.nutanix.com. T
 #. Progress through the standard install questions until you reach the Windows install location.
 
    .. note::
-     Choose **Windows Server 2012 R2 Datacenter (Server with a GUI)** and **Custom** installation when presented with the choice.
+     Choose **Windows Server 2016 Desktop Experience (Server with a GUI)** and **Custom** installation when presented with the choice.
 
 #. Click **Load Driver** and navigate to the CD where the Nutanix VirtIO is mounted.
 
