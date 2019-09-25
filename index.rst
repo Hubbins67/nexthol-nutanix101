@@ -83,7 +83,7 @@ The Prism service provides the web UI for managing Nutanix clusters and runs on 
    - Search :fa:`search`
    - Help :fa:`question`
    - Configuration :fa:`cog`
-   - User
+   - User :fa:`user`
 
    .. figure:: images/nutanix_tech_overview_05.png
 
@@ -96,9 +96,9 @@ Prism Element UI Review
 
 Where would you locate the version of AOS you are running?
 
-.. figure:: images/nutanix_tech_overview_06.png
+.. figure:: images/nutanix_tech_overview_06_5-11.png
 
-You can do this by clicking on the **username** drop down on the far right, and clicking **About Nutanix**.
+You can do this by clicking on the **User** drop down :fa:`user`, and clicking **About Nutanix**.
 
 How would you get to the following screen to view a summary of the number of hosts (or nodes) and the resource capacity and current utilization?
 
@@ -207,7 +207,7 @@ Block Awareness, in a sufficiently large cluster, ensures that secondary copies 
 
 The basic requirement for rack/block fault tolerance is to have minimum 3 blocks in the cluster (for RF2) as we need to store 3 copies of metadata. Starting in AOS 5.8, rack and block awareness can be supported with erasure coding enabled.
 
-#. From the View Options menu, click **Home**, and click **OK** in the **Data Resiliency Status** box.
+#. In **Prism > Home**, click **OK** in the **Data Resiliency Status** box.
 
 .. figure:: images/storage_config_03.png
 
@@ -241,7 +241,7 @@ Setup User VM Network
 
 Connect to Prism Element and create a network for user VM interfaces. Use any VLAN other than 0, and do not enable IP address management.
 
-#. From the View Options menu, select **VM**, and click **Network Config** on the right hand side.
+#. In **Prism Element > VM**, click **VMs**, then click **Network Config**.
 
 #. Select **Virtual Networks**, then click **+ Create Network**.
 
@@ -307,9 +307,11 @@ In order to provide high performance IO to VMs, AHV requires the installation of
 
 Nutanix validates and distributes these drivers via http://portal.nutanix.com. The ISO image containing the drivers has already been uploaded to the Image Service.
 
-#. From the View Options menu, select **VM** and click **+ Create VM**.
+#. In **Prism Element > VM > Table**, click **+ Create VM**.
 
-#. Fill out the following fields and click **Save**. Leave other settings at their default values.
+#. Fill out the following fields and click **Save**.
+
+    Leave other settings at their default values.
 
    - **Name** - *Initials*-Windows_VM
    - **Description** - (Optional) Description for your VM.
@@ -320,6 +322,7 @@ Nutanix validates and distributes these drivers via http://portal.nutanix.com. T
        - **Operation** - Clone from Image Service
        - **Image** - Windows2012R2.ISO
        - Select **Update**
+
        *This will mount the Windows Server ISO from the Image Service for boot/installation*
 
    - Select **+ Add New Disk**
@@ -328,6 +331,7 @@ Nutanix validates and distributes these drivers via http://portal.nutanix.com. T
        - **Storage Container** - Default
        - **Size (GiB)** - 30 GiB
        - Select **Add**
+
        *This will create a 30GiB vDisk on the selected Storage Container*
 
    - Select **+ Add New Disk**
@@ -335,19 +339,28 @@ Nutanix validates and distributes these drivers via http://portal.nutanix.com. T
        - **Operation** - Clone from Image Service
        - **Image** - Nutanix VirtIO ISO
        - Select **Add**
+       - **Boot Configuration**
+       - Leave the default selected **Legacy Boot**
 
    - Select **Add New NIC**
        - **VLAN Name** - Primary
        - Select **Add**
+
        *This will add a single virtual NIC to the VM on the selected Virtual Network*
 
 #. Click **Save** to create the VM.
+
+       .. note::
+
+         At the following URL you can find the supported Operating Systems
+
+         http://my.nutanix.com/uefi_boot_support
 
 #. Select the VM, then click **Power On** from the list of action links (below the table) to turn on the VM.
 
    .. figure:: images/deploy_workloads_vm_options.png
 
-#. Select the VM, then click **Launch Console** from the list of action links to access an HTML5 console to interact with the VM.
+#. Select the VM, then click **Launch Console** from the **Actions** drop-down menu to access an HTML5 console to interact with the VM.
 
 #. Progress through the standard install questions until you reach the Windows install location.
 
@@ -386,7 +399,7 @@ Nutanix validates and distributes these drivers via http://portal.nutanix.com. T
 
 #. Following OS installation you can complete the **Nutanix Guest Tools (NGT)** installation by selecting the VM in Prism and clicking **Manage Guest Tools > Enable Nutanix Guest Tools > Mount Guest Tools**, and clicking **Submit**.
 
-   This will use the virtual CD-ROM device to mount the NGT installation ISO to the VM. NGT includes the previously installed VirtIO drivers, as well as services to support self-service file restore and application consistent (VSS) snapshots.
+   This will use the virtual CD-ROM device to mount the NGT installation ISO to the VM. NGT includes the previously installed VirtIO drivers, as well as services to support **Self-Service File Restore (SSR)** and **Application Consistent (VSS) snapshots**.
 
     .. figure:: images/deploy_workloads_nutanix_guest_tools.png
 
@@ -399,9 +412,9 @@ Creating a Linux VM
 
 In this exercise you will create a CentOS VM from an existing, pre-installed disk image in the Image Service. It is common in many environments to have "template" style images of pre-installed operating systems. Similar to the previous exercise, the disk image has already been uploaded to the Image Service.
 
-#. From the View Options menu, select **VM** and select **Table**, then click **+ Create VM**.
+#. In **Prism Element > VM > Table**, click **+ Create VM**.
 
-#. Fill out the following fields and click **Save**. Leave other settings at their default values.
+#. Fill out the following fields and click **Save**:
 
    - **Name** - *Initials*-Linux_VM
    - **Description** - (Optional) Description for your VM.
@@ -414,6 +427,7 @@ In this exercise you will create a CentOS VM from an existing, pre-installed dis
       - **Operation** - Clone from Image Service
       - **Image** - CentOS7.qcow2
       - Select **Add**
+
       *This will create a thin clone of the existing CentOS disk image*
 
    - Select **Add New NIC**
@@ -423,6 +437,8 @@ In this exercise you will create a CentOS VM from an existing, pre-installed dis
    .. figure:: images/deploy_workloads_03.png
 
 #. Click **Save** to create the VM.
+
+#. **Launch the console** to see the VM being started.
 
 Workload Management
 +++++++++++++++++++
@@ -434,7 +450,7 @@ Power Actions and Console Access
 
 Explore VM power actions and console access.
 
-#. From the View Options menu, select **VM**, and click **Table**. Use the search bar to locate the Linux VM you created in the previous exercise (*Initials*-**Linux_VM**).
+#. In **Prism Element > VM > Table**, use the search bar to locate the Linux VM you created in the previous exercise (*Initials*-**Linux_VM**).
 
    Note that the Power State column for that VM shows a red dot, indicating that the VM is powered off.
 
@@ -442,7 +458,7 @@ Explore VM power actions and console access.
 
 #. Select the VM, then click **Launch Console**.
 
-   The console window provides 4 actions: Mount ISO, CTRL-ALT-DEL, Take Screen Capture, and Power.
+   The console window provides 4 actions: **Mount ISO, CTRL-ALT-DEL, Take Screen Capture, and Power**.
 
    .. figure:: images/manage_workloads_01.png
 
@@ -457,11 +473,13 @@ Explore VM power actions and console access.
 Cloning VMs
 ...........
 
-#. If not already in the VM table view, select **VM** from the View Options menu, and click **Table**. Select your *Initials*-**Linux_VM** VM.
+#. In **Prism Element > VM > Table**, select your *Initials*-**Linux_VM** VM.
 
-#. Click **Clone** from the list of action links (below the table).
+#. Click **Clone** from the **Actions** list.
 
-#. Fill out the following fields and click **Save**. Leave other settings at their default values.
+#. Fill out the following fields and click **Save**.
+
+   Leave other settings at their default values.
 
    - **Number of Clones** - 2
    - **Prefix Name**  - *Initials*-Linux-Clone
@@ -517,7 +535,7 @@ In this exercise you will use Prism to create and restore from VM snapshots, as 
 VM Snapshots
 ............
 
-#. From the View Options menu, select **VM** and select **Table**, and select your *Initials*-**Linux_VM** VM.
+#. In **Prism Element > VM > Table**, select your *Initials*-**Linux_VM** VM.
 
 #. If the VM is powered on, perform a **Guest Shutdown** power action.
 
@@ -556,11 +574,15 @@ As previously mentioned, Nutanix snapshots use a `redirect-on-write <https://nut
 Protection Domains
 ..................
 
-#. From the View Options menu, select **Data Protection** and select **Table**, click **+ Protection Domain > Async DR** to begin creating a PD.
+#. In **Prism Element > Data Protection > Table**, click **+ Protection Domain > Async DR** to begin creating a PD.
 
    .. note::
 
       Synchronous replication (Metro Availability) is currently support on ESXi and will be supported in AHV in a future release.
+
+#. When opening the Data Protection context of the menu a warning screen will appear. Click on the **OK** button to move forward.
+
+ .. figure:: images/data_protection_01.png
 
 #. Provide a name for the PD, and click **Create**.
 
@@ -576,7 +598,7 @@ Protection Domains
 
 #. Click **New Schedule** to define Recovery Point Objective (RPO) and retention.
 
-#. Configure your desired snapshot frequency (e.g. Repeat every 6 hours)
+#. Configure your desired snapshot frequency (e.g. Repeat every 1 hour)
 
    .. note::
 
@@ -597,6 +619,8 @@ Protection Domains
 #. Click **Create Schedule**.
 
 #. Click **Close** to exit.
+
+Additional information can be found `here <https://nutanixbible.com/#anchor-book-of-acropolis-backup-and-disaster-recovery>`_.
 
 That's it! You've successfully configured native data protection in Prism.
 
