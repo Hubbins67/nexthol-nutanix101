@@ -25,7 +25,7 @@ The Prism service provides the web UI for managing Nutanix clusters and runs on 
 #. Log in using the following credentials:
 
    - **Username** - admin
-   - **Password** - *HPOC Password*
+   - **Password** - *Password on HOL Splash Page*
 
    .. figure:: images/nutanix_tech_overview_01.png
 
