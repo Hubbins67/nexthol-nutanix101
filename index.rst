@@ -2,9 +2,9 @@
 
 .. _nutanix101:
 
-------------------------
-Nutanix 101
-------------------------
+---------------------------
+Fairway's Nutanix 101 Lab
+---------------------------
 
 *The estimated time to complete this lab is 60 minutes.*
 
